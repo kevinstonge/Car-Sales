@@ -1,3 +1,5 @@
+import * as types from "../actions/types";
+
 const initialState = {
   additionalPrice: 0,
   car: {
@@ -15,5 +17,18 @@ const initialState = {
   ],
 };
 export default function reducer(state = initialState, action) {
+  if (action.type === types.ADD_FEATURE) {
+    console.log("adding");
+    return {
+      ...state,
+      car: {
+        ...state.car,
+        features: [
+          ...state.car.features,
+          ...state.additionalFeatures.filter((f) => f.id === action.payload.id),
+        ],
+      },
+    };
+  }
   return state;
 }

@@ -9,7 +9,6 @@ import reducer from "./reducers/reducers";
 
 const App = () => {
   const store = createStore(reducer);
-  console.log(store.getState());
   return (
     <Provider store={store}>
       <div className="boxes">
