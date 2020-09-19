@@ -15,7 +15,5 @@ const initialState = {
   ],
 };
 export default function reducer(state = initialState, action) {
-  return {
-    title: "Hello world! I'm in the Redux store!",
-  };
+  return state;
 }
