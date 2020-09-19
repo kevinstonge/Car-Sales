@@ -18,17 +18,24 @@ const initialState = {
 };
 export default function reducer(state = initialState, action) {
   if (action.type === types.ADD_FEATURE) {
-    console.log("adding");
-    return {
-      ...state,
-      car: {
-        ...state.car,
-        features: [
-          ...state.car.features,
-          ...state.additionalFeatures.filter((f) => f.id === action.payload.id),
-        ],
-      },
-    };
+    //check if feature is already added
+    if (
+      state.car.features.filter((f) => f.id === action.payload.id).length === 0
+    ) {
+      const features = [
+        ...state.car.features,
+        ...state.additionalFeatures.filter((f) => f.id === action.payload.id),
+      ];
+      const additionalPrice = features.reduce((acc, cur) => acc + cur.price, 0);
+      return {
+        ...state,
+        additionalPrice,
+        car: {
+          ...state.car,
+          features,
+        },
+      };
+    }
   }
   return state;
 }
