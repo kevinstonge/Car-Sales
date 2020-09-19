@@ -37,5 +37,19 @@ export default function reducer(state = initialState, action) {
       };
     }
   }
+  if (action.type === types.REMOVE_FEATURE) {
+    const features = [
+      ...state.car.features.filter((f) => f.id !== action.payload.id),
+    ];
+    const additionalPrice = features.reduce((acc, cur) => acc + cur.price, 0);
+    return {
+      ...state,
+      additionalPrice,
+      car: {
+        ...state.car,
+        features,
+      },
+    };
+  }
   return state;
 }
